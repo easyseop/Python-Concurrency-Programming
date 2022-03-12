@@ -2,6 +2,8 @@ import time
 import asyncio
 
 # 비동기 함수 : 코드가 반드시 작성된 순서 그대로 실행되는 것이 아니다.
+# 코루틴은 다양한 진입점과 다양한 탈출점이 있는 루틴이다. await asyncio로 실행할 수 있다.
+# 파이썬 비동기 함수는 코루틴 함수로 만들 수 있다.
 
 
 async def delivery(name, mealtime):
