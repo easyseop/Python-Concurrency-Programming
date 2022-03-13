@@ -1,6 +1,23 @@
 import aiohttp
 import asyncio
+import aiofiles
+import os
 from config import get_secret
+
+
+async def img_downloader(session, img):
+    img_name = img.split("/")[-1].split("?")[0]
+
+    try:
+        os.mkdir("./images")
+    except FileExistsError:
+        pass
+
+    async with session.get(img) as response:
+        if response.status == 200:
+            async with aiofiles.open(f"./images/{img_name}", mode="wb") as file:
+                img_data = await response.read()
+                await file.write(img_data)
 
 
 async def fetch(session, url, i):
@@ -16,6 +33,9 @@ async def fetch(session, url, i):
         items = result["items"]
         images = [item["link"] for item in items]
         print(images)
+
+    async with aiohttp.ClientSession() as session:
+        await asyncio.gather(*[img_downloader(session, img) for img in images])
 
 
 async def main():
