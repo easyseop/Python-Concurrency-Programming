@@ -1,5 +1,5 @@
 # https://docs.python.org/3.7/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor
-
+# aiohttp에서 제공하는 코루틴이 없다면 멀티 스레딩을 사용! 
 
 import requests
 import time
@@ -34,3 +34,5 @@ if __name__ == "__main__":
     main()
     end = time.time()
     print(end - start)  # 약 6배 빨라짐
+
+
