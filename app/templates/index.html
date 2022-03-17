@@ -1,28 +1,56 @@
-<html>
+<html lang = "en">
     <head>
         <title>{{ title }}</title>
         <link rel="stylesheet" href="https://unpkg.com/mvp.css">
     </head>
-
+    <style>
+        section{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+    </style>
     <body>
         <header>
             <h1>지섭지섭</h1>
+            <center>
+                <form action="/search" id = "search_formd">
+                    <input type="search"
+                            placeholder="keyword"
+                            id= "serach_input"
+                            name = "q"/>
+                    <button type = "submit">검색</button>       
+                </form>
+            </center>
         </header>
-
-        <center>
-            <form action="/search" id = "search_formd">
-                <input type="search"
-                        placeholder="keyword"
-                        id= "serach_input"
-                        name = "q"/>
-                <button type = "submit">검색</button>       
-            </form>
-            
-        </center>
-    </body>
-
-    <main>
-        {{ keyword }}
-    </main>
+        <main>
+            {% if books %}
+            <!-- context에서 books 데이터를 받았다면 -->
+            <center>
+                <!-- {{books|length}}는 len(books)와 같습니다 (jinja템플릿 )-->
+                <h3 style="color : gray">{{books|length}}개 데이터 수집..</h3>
+            </center>
+            <section>
+                <!-- books 순회 -->
+                {% for book in books %}
+                <div>
+                    <img src = "{{book.image}}" width ="150px" height = "200px"/>
+                    <p>
+                        <!-- 출판사 이름의 문자열 길이가 10을 초과한다면 자른다-->
+                        {% if book.publisher|length > 10 %} 
+                        
+                        {{book.publisher[:10]}}...
+                        
+                        {% else %} {{book.publisher}} {% endif %}
+                    </p>
+                    <p>{{book.price}}</p>
+                </div>
+                {% endfor %}
+            </section>
+            {% else %}
+            <center><h3 style= "color:gray">Please Input Keyword...</h3></center>
+            {% endif %}
+        </main>
+</body>
 </html>
  

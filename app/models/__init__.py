@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from odmantic import AIOEngine
-from config2 import MONGO_URL, MONGO_DB_NAME
+from app.config2 import MONGO_URL, MONGO_DB_NAME
 
 client = AsyncIOMotorClient(MONGO_URL)
 engine = AIOEngine(motor_client=client, database=MONGO_DB_NAME)

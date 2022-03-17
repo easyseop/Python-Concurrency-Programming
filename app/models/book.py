@@ -5,7 +5,7 @@ class BookModel(Model):
     keyword: str
     publisher: str
     price: int
-    # image: str
+    image: str
 
     class Config:
-        collection = "books"
+        collection = "book_models"
