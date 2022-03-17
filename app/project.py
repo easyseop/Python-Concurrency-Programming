@@ -32,6 +32,7 @@ async def root(request: Request, q: str):
     )
 
 
+
 @app.on_event("startup")
 def on_app_start():
 
