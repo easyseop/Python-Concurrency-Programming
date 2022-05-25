@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>{{ title }} </title>
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+    </head>
+    <body>
+        <header>
+            <h1>콜렉터 북북이</h1>
+        </header>
+
+            <center>
+                <form action="/search" id = "search_formd">
+                    <input type="search"
+                            placeholder="keyword"
+                            id= "serach_input"
+                            name = "q"/>
+                    <button type = "submit">검색</button>       
+                </form>
+            </center>
+        </header>
+        <main>
+            {{keyword}} 
+            {{name}}
+        </main>
+    </body>
+</html>

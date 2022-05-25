@@ -5,23 +5,13 @@ import threading
 
 
 def fetcher(session, url):
-    print(
-        f"{os.getpid()} process | {threading.get_ident()} url : {url} "
-    )  # os.getpid() : 현재 프로세스 ID 호출
+    print(f"{os.getpid()} process | {threading.get_ident()} url : {url} ")
     with session.get(url) as response:
         return response.text
 
 
 def main():
-    # urls = ["https://naver.com",
-    # "https://google.com",
-    #  "https://instagram.com"]
-    urls = ["https://google.com"] * 50
-
-    """session = requests.Session()
-    session.get(url) # file open과 비슷
-    session.close()
-    """
+    urls = ["https://naver.com","https://apple.com"] * 50
 
     with requests.Session() as session:
         result = [fetcher(session, url) for url in urls]
@@ -31,5 +21,4 @@ def main():
 if __name__ == "__main__":
     start = time.time()
     main()
-    end = time.time()
-    print(end - start)
+    end = time.time() # 18초 

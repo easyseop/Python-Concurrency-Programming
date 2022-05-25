@@ -15,7 +15,7 @@ def main():
 
     """session = requests.Session()
     session.get(url) # file open과 비슷
-    session.close()
+    session.close() 
     """
 
     with requests.Session() as session:

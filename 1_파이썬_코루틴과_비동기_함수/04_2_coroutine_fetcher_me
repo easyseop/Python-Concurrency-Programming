@@ -1,0 +1,23 @@
+import asyncio
+import aiohttp
+import time
+
+
+async def fetch(session, url):
+    async with session.get(url) as response:
+        return response.text
+
+
+async def main():
+    urls = ["http://naver.com", "http://google.com", "http://instagram.com"] * 10
+
+    async with aiohttp.ClientSession() as session:
+        result = await asyncio.gather(*[fetch(session, url) for url in urls])
+        print(result)
+
+
+if __name__ == "__main__":
+    start = time.time()
+    asyncio.run(main())
+    end = time.time()
+    print("learning time : ", end - start, "second")  # 12초
