@@ -3,16 +3,23 @@ import requests
 import time
 
 
-def fetch(session, url):
+def fetcher(session, url):
     with session.get(url) as response:
         return response.text
 
 
 def main():
-    urls = ["http://naver.com", "http://google.com", "http://instagram.com"] * 10
+
+    urls = ["https://naver.com", "https://google.com", "https://instagram.com"] * 20
+
+    """
+    session = requests.Session()
+    session.get(url)
+    session.close()
+    """
 
     with requests.Session() as session:
-        result = [fetch(session, url) for url in urls]
+        result = [fetcher(session, url) for url in urls]
         print(result)
 
 
@@ -20,5 +27,4 @@ if __name__ == "__main__":
     start = time.time()
     main()
     end = time.time()
-
-    print("learning time : ", end - start, "second")  # 12초
+    print(end - start)

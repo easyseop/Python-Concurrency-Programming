@@ -1,3 +1,6 @@
+# https://docs.aiohttp.org/en/stable/
+# pip install aiohttp~=3.7.3
+
 import asyncio
 import aiohttp
 import time
@@ -5,7 +8,7 @@ import time
 
 async def fetch(session, url):
     async with session.get(url) as response:
-        return response.text
+        return response.text()
 
 
 async def main():
