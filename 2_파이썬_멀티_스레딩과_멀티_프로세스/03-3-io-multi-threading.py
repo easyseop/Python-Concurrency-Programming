@@ -23,12 +23,13 @@ def main():
 
     with requests.Session() as session:
         params = [(session, url) for url in urls]
+        print(params)
         result = list(executor.map(fetcher, params))
-        print(result)
+        # print(result)
 
 
 if __name__ == "__main__":
     start = time.time()
     main()
     end = time.time()
-    print(end-start)
+    print(end - start)

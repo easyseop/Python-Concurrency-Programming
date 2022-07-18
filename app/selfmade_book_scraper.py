@@ -1,44 +1,52 @@
 import asyncio
-from config2 import get_secret
+from tracemalloc import start
 import aiohttp
-from models import mongodb
+import time
+from odmantic import AIOEngine
+from pathlib import Path
+
+from config import get_secret
 from models.book import BookModel
+from models import mongodb
 
 
-NAVER_API_BOOK = "https://openapi.naver.com/v1/search/book"
+# from models import mongodb
+# from models.book import BookModel
 
 
-async def fetch(session, url):
+# def NaverBookScraper
+
+# url =https://openapi.naver.com/v1/search/book?query=파이&page=1&display=2
+
+
+async def fetch(session, url, i):
+
+    print(i + 1, "번째 페이지")
+    print(url)
     headers = {
         "X-Naver-Client-Id": get_secret("NAVER_API_ID"),
         "X-Naver-Client-Secret": get_secret("NAVER_API_SECRET"),
     }
     async with session.get(url, headers=headers) as response:
-        result = await response.json()  # json으로 호출
-        items = result["items"]
-        # images = [item["link"] for item in items]
-        title = [item["title"].replace("<b>", "").replace("</b>", "") for item in items]
-        price = [item["price"] for item in items]
-        publisher = [item["publisher"] for item in items]
-        for t, p, q in zip(title, price, publisher):
-            book = BookModel(keyword=t, publisher=q, price=int(p))
-            print(t, p, q)
-            await mongodb.engine.save(book)
+        link = await response.json()
+        items = link["items"]
+        return items
 
 
-async def main():
-    Base_URL = "https://openapi.naver.com/v1/search/book"
+async def scraper():
+
     keyword = "파이썬"
-    urls = [f"{Base_URL}?query={keyword}&display=20&start={20*i+1}" for i in range(5)]
+    BASE_URL = f"https://openapi.naver.com/v1/search/book?query={keyword}&display=10"
+    urls = [BASE_URL + f"&start={20*i+1}" for i in range(1, 5)]
     async with aiohttp.ClientSession() as session:
-        await asyncio.gather(*[fetch(session, url) for url in urls])
+        await asyncio.gather(
+            *[fetch(session, url, i + 1) for i, url in enumerate(urls)]
+        )
 
 
-# async def search(self, keyword, total_page):
-#     apis = []
-
-
-if __name__ == "__main__":
+def start_scraper():
     mongodb.connect()
-    asyncio.get_event_loop().run_until_complete(main())
-    mongodb.close()
+    asyncio.run(scraper())
+
+
+start_scraper()

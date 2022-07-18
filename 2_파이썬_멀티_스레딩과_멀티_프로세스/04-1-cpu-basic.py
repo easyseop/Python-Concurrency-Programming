@@ -2,7 +2,7 @@ import os
 import time
 import threading
 
-nums = [50, 63, 32]
+nums = [40] * 10
 
 
 def cpu_bound_func(num):
@@ -18,7 +18,7 @@ def cpu_bound_func(num):
 
 def main():
     for num in nums:
-        cpu_bound_func(nums)
+        cpu_bound_func(num)
 
 
 if __name__ == "__main__":

@@ -11,14 +11,14 @@ def fetcher(session, url):
 
 
 def main():
-    urls = ["https://naver.com","https://apple.com"] * 50
+    urls = ["https://naver.com", "https://google.com"] * 50
 
     with requests.Session() as session:
         result = [fetcher(session, url) for url in urls]
-        print(result)
+        # print(result)
 
 
 if __name__ == "__main__":
     start = time.time()
     main()
-    end = time.time() # 18초 
+    end = time.time()  # 18초

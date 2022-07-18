@@ -21,7 +21,9 @@ async def fetch(session, url, i):
 async def main():
     Base_URL = "https://openapi.naver.com/v1/search/image"
     keyword = "cat"
-    urls = [f"{Base_URL}?query={keyword}&display=20&start={20*i+1}" for i in range(10)]
+    urls = [
+        f"{Base_URL}?query={keyword}&display=20&start={20*i+1}" for i in range(9 + 1)
+    ]
     async with aiohttp.ClientSession() as session:
         await asyncio.gather(*[fetch(session, url, i) for i, url in enumerate(urls)])
 

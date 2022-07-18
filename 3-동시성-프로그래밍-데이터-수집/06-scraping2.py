@@ -31,7 +31,7 @@ async def fetch(session, url, i):
     async with session.get(url, headers=headers) as response:
         result = await response.json()  # json으로 호출
         items = result["items"]
-        images = [item["link"] for item in items]
+        images = [item["image"] for item in items]
         print(images)
 
     async with aiohttp.ClientSession() as session:

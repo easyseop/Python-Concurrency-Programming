@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from odmantic import AIOEngine
-from app.config2 import MONGO_URL, MONGO_DB_NAME
+from app.config import MONGO_URL, MONGO_DB_NAME
 
 client = AsyncIOMotorClient(MONGO_URL)
 engine = AIOEngine(motor_client=client, database=MONGO_DB_NAME)
@@ -17,6 +17,7 @@ class MongoDB:
         print("DB와 성공적으로 연결되었습니다")
 
     def close(self):
+        print("DB를 종료합니다.")
         self.client.close()
 
 

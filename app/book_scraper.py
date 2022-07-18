@@ -1,4 +1,4 @@
-from app.config2 import get_secret
+from app.config import get_secret
 import aiohttp
 import asyncio
 
