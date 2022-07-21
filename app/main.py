@@ -11,7 +11,6 @@ from app.book_scraper import NaverBookScraper
 app = FastAPI()
 
 BASE_DIR = Path(__file__).resolve().parent  # 현재 파일의 부모노드로 경로설정
-print(BASE_DIR)
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 

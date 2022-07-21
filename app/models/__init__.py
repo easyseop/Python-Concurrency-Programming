@@ -1,3 +1,4 @@
+import motor
 from motor.motor_asyncio import AsyncIOMotorClient
 from odmantic import AIOEngine
 from app.config import MONGO_URL, MONGO_DB_NAME
