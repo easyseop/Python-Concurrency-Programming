@@ -1,8 +1,6 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from motor.motor_asyncio import AsyncIOMotorClient
-from odmantic import AIOEngine
 from pathlib import Path
 from app.models import mongodb
 from app.models.book import BookModel
@@ -14,7 +12,7 @@ app = FastAPI()
 
 BASE_DIR = Path(__file__).resolve().parent  # 현재 파일의 부모노드로 경로설정
 print(BASE_DIR)
-templates = Jinja2Templates(directory=BASE_DIR / "templates")
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 
 @app.get("/", response_class=HTMLResponse)  # return 값으로 json이 아닌 html로 하겠다는 의미의 파라미터
