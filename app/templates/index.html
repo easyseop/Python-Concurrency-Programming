@@ -19,9 +19,23 @@
                             placeholder="keyword"
                             id= "serach_input"
                             name = "q"/>
-                    <button type = "submit">검색</button>       
+                    <button type = "submit">검색</button>    
+                    
+                    {% if keyword|length > 0 %}
+                        <header>
+                            <h3>  {{keyword}} 에 대한 검색 결과 입니다.  </h3>
+                        </header>
+                    
+                    {% elif keyword == ''  %}
+                        <header>
+                            <h3> 검색어를 다시 입력 해주세요 </h3>
+                        </header>
+                    {% endif %} 
+
+                </center>
+                
                 </form>
-            </center>
+        
         </header>
         <main>
             {% if books %}
@@ -37,16 +51,18 @@
                     <img src = "{{book.image}}" width ="150px" height = "200px"/>
                     <p>
                         <!-- 출판사 이름의 문자열 길이가 10을 초과한다면 자른다-->
+                        <!-- len(book['publisher']) -->
                         {% if book.publisher|length > 10 %} 
                         
                         {{book.publisher[:10]}}...
-                        
+                        <!-- -->
                         {% else %} {{book.publisher}} {% endif %}
                     </p>
-                    <p>{{book.price}}</p>
+                    <p>{{book.price}} 원</p>
                 </div>
                 {% endfor %}
             </section>
+            <!-- context에서 데이터를 받지 못했다면 -->
             {% else %}
             <center><h3 style= "color:gray">Please Input Keyword...</h3></center>
             {% endif %}

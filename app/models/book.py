@@ -8,4 +8,4 @@ class BookModel(Model):
     image: str
 
     class Config:
-        collection = "book_modelss"
+        collection = "jiseop's book site"
